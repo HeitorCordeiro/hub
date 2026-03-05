@@ -20,27 +20,20 @@ class EducationalResourceController extends Controller
         $query = EducationalResource::query();
 
         if ($q !== '') {
-            $query->where(function ($sub) use ($q, $field) {
-                if ($field === 'title') {
-                    $sub->where('title', 'like', "%{$q}%");
-                    return;
-                }
-
-                if ($field === 'type') {
-                    $sub->where('type', 'like', "%{$q}%");
-                    return;
-                }
-
-                if ($field === 'tag') {
-                    $sub->where('tags', 'like', "%{$q}%");
-                    return;
-                }
-
-                $sub->where('title', 'like', "%{$q}%")
-                    ->orWhere('description', 'like', "%{$q}%")
-                    ->orWhere('type', 'like', "%{$q}%")
-                    ->orWhere('tags', 'like', "%{$q}%");
-            });
+            if ($field === 'title') {
+                $query->where('title', 'like', "%{$q}%");
+            } elseif ($field === 'type') {
+                $query->where('type', 'like', "%{$q}%");
+            } elseif ($field === 'tag') {
+                $query->where('tags', 'like', "%{$q}%");
+            } else {
+                $query->where(function ($sub) use ($q) {
+                    $sub->where('title', 'like', "%{$q}%")
+                        ->orWhere('description', 'like', "%{$q}%")
+                        ->orWhere('type', 'like', "%{$q}%")
+                        ->orWhere('tags', 'like', "%{$q}%");
+                });
+            }
         }
 
         return response()->json($query->paginate($perPage));

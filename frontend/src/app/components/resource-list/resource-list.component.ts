@@ -355,13 +355,16 @@ export class ResourceListComponent implements OnInit {
   private isSearching = computed(() => this.searchQuery().trim().length > 0);
 
   visibleResources = computed(() => {
-    const list = this.isSearching()
-      ? (this.searchResults() ?? [])
-      : this.resources();
-
-    const start = (this.currentPage() - 1) * this.pageSize();
-    const end = start + this.pageSize();
-    return list.slice(start, end);
+    if (this.isSearching()) {
+      // Paginação local para resultados de busca
+      const list = this.searchResults() ?? [];
+      const start = (this.currentPage() - 1) * this.pageSize();
+      const end = start + this.pageSize();
+      return list.slice(start, end);
+    }
+    
+    // Sem busca: backend já retorna a página correta
+    return this.resources();
   });
 
   get totalPages(): number {
