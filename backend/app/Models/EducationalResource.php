@@ -9,6 +9,7 @@ class EducationalResource extends Model
 {
     use HasFactory;
 
+    
     protected $table = 'educational_resources';
 
     protected $fillable = [
