@@ -24,16 +24,6 @@ Aplicação Fullstack para gerenciamento de materiais didáticos com sugestão i
 
 ---
 
-## Configuração do Banco de Dados (MySQL)
-
-Crie o banco de dados antes de iniciar o backend:
-
-```sql
-CREATE DATABASE hub_recursos_educacionais CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-
----
-
 ## Backend (Laravel)
 
 ```bash
@@ -90,7 +80,7 @@ npm start
 
 O frontend ficará disponível em `http://localhost:4200`.
 
-Ao acessar, você será redirecionado para a tela de **Login**. Utilize a tela de **Cadastro** para criar sua conta antes de fazer login.
+Ao acessar, você será redirecionado para a tela de **Login**. Utilize a tela de **Cadastro** para criar sua conta antes de fazer login. (não mais, mas caso haja erro basta criar e fazer o login)
 
 ---
 
@@ -173,6 +163,3 @@ AI_MOCK_MODE=true   # false para usar a IA real
 JWT_SECRET=          # Gerado automaticamente com: php artisan jwt:secret
 JWT_TTL=60           # Tempo de expiração do token em minutos
 ```
-
-> ⚠️ O arquivo `.env` está no `.gitignore` e **nunca** deve ser commitado.
-> ⚠️ Execute `php artisan jwt:secret` após configurar o `.env` para gerar o secret JWT.
